@@ -3,10 +3,14 @@
 
   <span class="spacer"></span>
 
-  <button mat-button routerLink="/user/home">Home</button>
-  <button mat-button routerLink="/user/categories">Categories</button>
-  <button mat-button routerLink="/user/cart">Cart</button>
-  <button mat-button routerLink="/user/profile">Profile</button>
+  <button mat-button routerLink="/user/home" routerLinkActive="active">Home</button>
+
+  <button mat-button routerLink="/user/cart" routerLinkActive="active">
+    🛒 Cart
+    <span class="cart-badge" *ngIf="(cartCount$ | async) as count">{{ count }}</span>
+  </button>
+
+  <button mat-button routerLink="/user/profile" routerLinkActive="active">Profile</button>
 
   <span class="spacer"></span>
 

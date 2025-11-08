@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module'; // ✅ Import shared module
 
 // Components
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
-import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { AddProductDialogComponent } from './product-dialog/add-product-dialog.component';
 import { CategoryProductsComponent } from './category-products/category-products.component';
 
@@ -28,8 +28,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select'; // ✅ Needed for mat-select
-import { MatOptionModule } from '@angular/material/core';   // ✅ Needed for mat-option
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -37,16 +37,14 @@ import { MatOptionModule } from '@angular/material/core';   // ✅ Needed for ma
     UsersComponent,
     OrdersComponent,
     AdminLayoutComponent,
-    ConfirmDialogComponent,
     AddProductDialogComponent,
-      CategoryProductsComponent
+    CategoryProductsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     AdminRoutingModule,
-
-    // ✅ Angular Material modules
+    SharedModule, // ✅ Use SharedModule for ConfirmDialog
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
@@ -55,15 +53,15 @@ import { MatOptionModule } from '@angular/material/core';   // ✅ Needed for ma
     MatButtonModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule, // ✅ Added
+    MatProgressBarModule,
     MatSnackBarModule,
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSelectModule, // ✅ Added
-    MatOptionModule  // ✅ Added
+    MatSelectModule,
+    MatOptionModule
   ]
 })
 export class AdminModule {}

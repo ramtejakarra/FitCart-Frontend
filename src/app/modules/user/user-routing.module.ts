@@ -5,6 +5,7 @@ import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,9 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'category/:id', component: CategoryComponent }, // 👈 shows subcategories
       { path: 'category/:id/products', component: ProductListComponent }, // 👈 shows products
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'cart', component: CartComponent }
+
     ]
   }
 ];

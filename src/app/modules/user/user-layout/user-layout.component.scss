@@ -1,29 +1,42 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
-  font-weight: 500;
+  justify-content: space-between;
 
   .logo {
+    font-size: 1.4rem;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-  }
-
-  button {
-    color: white;
-    font-size: 15px;
+    user-select: none;
   }
 
   .spacer {
     flex: 1;
   }
+
+  button[mat-button] {
+    font-weight: 500;
+    color: white;
+    text-transform: none;
+
+    &.active {
+      border-bottom: 2px solid #fff;
+    }
+  }
+
+  .cart-badge {
+    background: #ff4081;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    margin-left: 6px;
+    line-height: 1.2;
+  }
 }
 
 .content {
-  padding: 2rem;
-  background-color: #fafafa;
+  padding: 20px;
+  background-color: #f7f9fc;
   min-height: calc(100vh - 64px);
 }
