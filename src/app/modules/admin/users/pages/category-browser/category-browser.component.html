@@ -1,0 +1,37 @@
+<div class="category-container">
+  <h2 class="section-title">Shop by Category</h2>
+
+  <!-- Categories -->
+  <div class="category-grid">
+    <mat-card *ngFor="let c of categories" (click)="selectCategory(c)"
+              [class.selected]="c.id === selectedCategory?.id">
+      <mat-card-title>{{ c.name }}</mat-card-title>
+    </mat-card>
+  </div>
+
+  <!-- Subcategories -->
+  <div *ngIf="selectedCategory" class="subcategory-grid">
+    <h3>{{ selectedCategory.name }}</h3>
+    <div class="subcategory-items">
+      <button mat-raised-button color="accent"
+              *ngFor="let sub of subCategories"
+              (click)="selectSubCategory(sub)">
+        {{ sub.name }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Products -->
+  <div *ngIf="products.length > 0" class="product-grid">
+    <h3>{{ selectedSubCategory?.name }} Products</h3>
+
+    <mat-card *ngFor="let p of products" class="product-card">
+      <img mat-card-image [src]="p.imageUrl" alt="{{ p.name }}">
+      <mat-card-title>{{ p.name }}</mat-card-title>
+      <mat-card-subtitle>₹{{ p.price }}</mat-card-subtitle>
+      <mat-card-content>{{ p.description }}</mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="loading">Loading...</div>
+</div>

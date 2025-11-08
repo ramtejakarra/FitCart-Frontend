@@ -1,0 +1,21 @@
+<div class="category-container" *ngIf="!loading; else loadingTpl">
+  <h2 class="title">🧩 Subcategories</h2>
+
+  <div class="subcategory-grid">
+    <div
+      *ngFor="let sub of subcategories"
+      class="subcategory-card"
+      (click)="goToProducts(sub.id)"
+    >
+      <img
+        [src]="sub.imageUrl || 'https://via.placeholder.com/200x150?text=Subcategory'"
+        alt="{{ sub.name }}"
+      />
+      <h3>{{ sub.name }}</h3>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <p class="loading-text">Loading subcategories...</p>
+</ng-template>

@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="navbar">
+  <span class="logo" (click)="navigateToHome()">FitCart 🛍️</span>
+
+  <span class="spacer"></span>
+
+  <button mat-button routerLink="/user/home">Home</button>
+  <button mat-button routerLink="/user/categories">Categories</button>
+  <button mat-button routerLink="/user/cart">Cart</button>
+  <button mat-button routerLink="/user/profile">Profile</button>
+
+  <span class="spacer"></span>
+
+  <button mat-stroked-button color="warn" (click)="logout()">Logout</button>
+</mat-toolbar>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

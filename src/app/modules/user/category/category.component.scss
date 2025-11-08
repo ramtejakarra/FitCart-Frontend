@@ -1,0 +1,43 @@
+.category-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.title {
+  color: #3f51b5;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.subcategory-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.subcategory-card {
+  width: 220px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.subcategory-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.subcategory-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  color: gray;
+}

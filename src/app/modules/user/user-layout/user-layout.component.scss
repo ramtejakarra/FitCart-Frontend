@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  font-weight: 500;
+
+  .logo {
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  button {
+    color: white;
+    font-size: 15px;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+}
+
+.content {
+  padding: 2rem;
+  background-color: #fafafa;
+  min-height: calc(100vh - 64px);
+}

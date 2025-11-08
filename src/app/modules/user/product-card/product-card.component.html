@@ -1,0 +1,26 @@
+<mat-card class="product-card">
+  <div class="product-image">
+    <img
+      [src]="product.imageUrl || 'https://via.placeholder.com/250'"
+      alt="{{ product.name }}"
+    />
+  </div>
+
+  <div class="product-info">
+    <h3 class="product-name" matTooltip="{{ product.name }}">{{ product.name }}</h3>
+    <p class="product-description" matTooltip="{{ product.description }}">
+      {{ product.description || 'No description available' }}
+    </p>
+
+    <div class="price-section">
+      <span class="price">₹{{ product.price }}</span>
+      <span *ngIf="product.discount" class="discount">
+        -{{ product.discount }}%
+      </span>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="addToCart()">
+      🛒 Add to Cart
+    </button>
+  </div>
+</mat-card>

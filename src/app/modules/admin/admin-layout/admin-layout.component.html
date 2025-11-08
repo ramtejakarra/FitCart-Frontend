@@ -1,0 +1,15 @@
+<div class="admin-header">
+  <h2>FitCart Admin Dashboard</h2>
+
+  <nav class="admin-nav">
+    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/admin/category-products" routerLinkActive="active">Products</a>
+    <a routerLink="/admin/users" routerLinkActive="active">Users</a>
+    <a routerLink="/admin/orders" routerLinkActive="active">Orders</a>
+
+    <!-- 🔴 Logout Button -->
+    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </nav>
+</div>
+
+<router-outlet></router-outlet>

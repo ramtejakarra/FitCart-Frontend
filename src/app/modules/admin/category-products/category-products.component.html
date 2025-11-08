@@ -1,0 +1,73 @@
+<div class="admin-dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Categories</h3>
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let cat of categories"
+        (click)="onCategorySelect(cat.id)"
+        [class.active]="cat.id === selectedCategoryId"
+      >
+        {{ cat.name }}
+        <button mat-icon-button color="primary" (click)="$event.stopPropagation()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <div *ngIf="subCategories.length && selectedCategoryId" class="subcat-list">
+      <h4>Subcategories</h4>
+      <div>
+        <button
+          mat-stroked-button
+          color="primary"
+          *ngFor="let sub of subCategories"
+          [class.active]="sub.id === selectedSubCategoryId"
+          (click)="onSubCategorySelect(sub.id)"
+        >
+          {{ sub.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Section -->
+  <div class="content">
+    <div class="header">
+      <h3>Products</h3>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="openAddProductDialog()"
+        [disabled]="!selectedSubCategoryId"
+      >
+        Add Product
+      </button>
+    </div>
+
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+    <div *ngIf="products.length; else noData" class="products-grid">
+      <mat-card *ngFor="let product of products" class="product-card">
+        <img [src]="product.imageUrl" alt="Product Image" />
+        <div class="details">
+          <h4>{{ product.name }}</h4>
+          <p>₹{{ product.price }}</p>
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="actions">
+          <button mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteProduct(product.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+    </div>
+
+    <ng-template #noData>
+      <p class="no-data">No products available. Select a subcategory or add a new product.</p>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<h2 mat-dialog-title>Add Product</h2>
+
+<mat-dialog-content>
+  <form class="product-form" #productForm="ngForm">
+    <div class="form-grid">
+      <!-- Product Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Product Name *</mat-label>
+        <input matInput [(ngModel)]="product.name" name="name" required />
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="product.description"
+          name="description"
+          rows="3"
+        ></textarea>
+      </mat-form-field>
+
+      <!-- Category -->
+      <mat-form-field appearance="outline">
+        <mat-label>Category *</mat-label>
+        <mat-select
+          [(ngModel)]="product.categoryId"
+          name="categoryId"
+          (selectionChange)="onCategoryChange($event.value)"
+          required
+        >
+          <mat-option
+            *ngFor="let cat of categories"
+            [value]="cat.id"
+            >{{ cat.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Subcategory -->
+      <mat-form-field appearance="outline">
+        <mat-label>Subcategory *</mat-label>
+        <mat-select
+          [(ngModel)]="product.subCategoryId"
+          name="subCategoryId"
+          required
+        >
+          <mat-option
+            *ngFor="let sub of subCategories"
+            [value]="sub.id"
+            >{{ sub.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Price -->
+      <mat-form-field appearance="outline">
+        <mat-label>Price (₹)</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="product.price"
+          name="price"
+          required
+        />
+      </mat-form-field>
+
+      <!-- Stock -->
+      <mat-form-field appearance="outline">
+        <mat-label>Stock</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="product.stock"
+          name="stock"
+          required
+        />
+      </mat-form-field>
+
+      <!-- Discount -->
+      <mat-form-field appearance="outline">
+        <mat-label>Discount (%)</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="product.discount"
+          name="discount"
+        />
+      </mat-form-field>
+
+      <!-- Image URL -->
+      <mat-form-field appearance="outline">
+        <mat-label>Image URL</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.imageUrl"
+          name="imageUrl"
+          placeholder="https://example.com/image.jpg"
+        />
+      </mat-form-field>
+
+      <!-- Image Preview -->
+      <div *ngIf="product.imageUrl" class="image-preview">
+        <img
+          [src]="product.imageUrl"
+          alt="Preview"
+          width="120"
+          height="120"
+          style="border-radius: 8px;"
+        />
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!product.name || !product.categoryId || !product.subCategoryId"
+    (click)="saveProduct()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>
