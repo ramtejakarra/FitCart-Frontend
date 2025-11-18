@@ -1,0 +1,30 @@
+<div class="checkout-page">
+  <h2>Checkout</h2>
+
+  <ng-container *ngIf="(cartItems$ | async)?.length; else emptyTpl">
+
+    <div class="items">
+      <div class="item" *ngFor="let it of cartItems$ | async">
+        <img [src]="it.imageUrl" />
+        <div class="meta">
+          <h4>{{ it.name }}</h4>
+          <p>₹{{ it.price }} × {{ it.quantity }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="total">
+      <h3>Total: ₹{{ total$ | async }}</h3>
+
+      <button mat-raised-button color="primary"
+              (click)="placeOrderAndPay()">
+        Pay Now
+      </button>
+    </div>
+
+  </ng-container>
+
+  <ng-template #emptyTpl>
+    <p>Your cart is empty 😔</p>
+  </ng-template>
+</div>

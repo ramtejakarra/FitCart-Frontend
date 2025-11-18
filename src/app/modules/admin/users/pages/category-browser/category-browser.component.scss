@@ -1,25 +1,92 @@
-.category-container {
-  padding: 20px;
+/* 🛍️ Product Section Styling */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+  justify-items: center;
+}
+
+.product-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-}
-
-.category-grid, .subcategory-items, .product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-
-mat-card {
-  width: 220px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  width: 100%;
+  max-width: 300px;
+
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    .product-image {
+      transform: scale(1.05);
+    }
+  }
+
+  .product-image {
+    height: 200px;
+    width: 100%;
+    object-fit: contain;
+    background: #f8f9fa;
+    padding: 12px;
+    transition: transform 0.4s ease;
+  }
+
+  .product-info {
+    padding: 15px;
+
+    mat-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 5px;
+    }
+
+    mat-card-subtitle {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1976d2;
+      margin-bottom: 10px;
+    }
+
+    .product-description {
+      color: #555;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      min-height: 40px;
+    }
+
+    .add-btn {
+      background: linear-gradient(45deg, #1976d2, #64b5f6);
+      font-weight: 600;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+
+      mat-icon {
+        margin-right: 5px;
+      }
+
+      &:hover {
+        background: linear-gradient(45deg, #0d47a1, #42a5f5);
+      }
+    }
   }
 }
 
-.selected {
-  border: 2px solid #3f51b5;
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
+
+.no-products {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+  margin-top: 40px;
+}
+

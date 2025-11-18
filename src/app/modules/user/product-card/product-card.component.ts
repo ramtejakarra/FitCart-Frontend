@@ -1,4 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { addToCart } from '../cart/cart.actions';
+import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-product-card',
@@ -6,11 +10,21 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent {
-  @Input() product: any; // 👈 Receives product data from parent (ProductListComponent)
+  @Input() product!: Product;
 
-  addToCart(): void {
-    // 🧠 For now, just log or show alert — later you can integrate real cart service
-    console.log('Added to cart:', this.product);
-    alert(`${this.product.name} added to cart 🛒`);
+  constructor(
+    private store: Store,
+    private snackBar: MatSnackBar // ✅ Make sure this is here
+  ) {}
+
+  addToCart(product: Product): void {
+    this.store.dispatch(addToCart({ product }));
+
+    this.snackBar.open(`🛒 ${product.name} added to cart!`, 'Close', {
+      duration: 2500,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+      panelClass: ['fitcart-snackbar']
+    });
   }
 }

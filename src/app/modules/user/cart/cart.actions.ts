@@ -1,8 +1,9 @@
 import { createAction, props } from '@ngrx/store';
+import { Product } from '../../../models/product.model'; // we'll fix this below
 
 export const addToCart = createAction(
   '[Cart] Add To Cart',
-  props<{ product: any }>()
+  props<{ product: Product }>()
 );
 
 export const removeFromCart = createAction(
@@ -10,12 +11,12 @@ export const removeFromCart = createAction(
   props<{ productId: number }>()
 );
 
-export const increaseQty = createAction(
+export const increaseQuantity = createAction(
   '[Cart] Increase Quantity',
   props<{ productId: number }>()
 );
 
-export const decreaseQty = createAction(
+export const decreaseQuantity = createAction(
   '[Cart] Decrease Quantity',
   props<{ productId: number }>()
 );

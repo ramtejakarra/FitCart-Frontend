@@ -14,7 +14,9 @@ export class CategoryBrowserComponent implements OnInit {
 
   selectedCategory: any = null;
   selectedSubCategory: any = null;
+
   loading = false;
+  errorMessage = '';
 
   constructor(
     private categorySvc: CategoryService,
@@ -25,26 +27,71 @@ export class CategoryBrowserComponent implements OnInit {
     this.loadCategories();
   }
 
-  loadCategories() {
-    this.categorySvc.getAll().subscribe(data => this.categories = data);
-  }
-
-  selectCategory(category: any) {
-    this.selectedCategory = category;
-    this.selectedSubCategory = null;
-    this.products = [];
-    this.categorySvc.getSubCategories(category.id).subscribe(data => this.subCategories = data);
-  }
-
-  selectSubCategory(sub: any) {
-    this.selectedSubCategory = sub;
+  /** 🔹 Load all main categories */
+  loadCategories(): void {
     this.loading = true;
-    this.productSvc.getBySubCategory(sub.id).subscribe({
-      next: data => {
-        this.products = data;
+    this.errorMessage = '';
+
+    this.categorySvc.getAll().subscribe({
+      next: (data) => {
+        this.categories = data;
         this.loading = false;
       },
-      error: () => this.loading = false
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = 'Failed to load categories. Please try again.';
+        console.error('Error loading categories:', err);
+      }
     });
+  }
+
+  /** 🔹 When a main category is selected */
+  selectCategory(category: any): void {
+    this.selectedCategory = category;
+    this.selectedSubCategory = null;
+    this.subCategories = [];
+    this.products = [];
+    this.errorMessage = '';
+
+    this.loading = true;
+
+    this.categorySvc.getSubCategories(category.id).subscribe({
+      next: (data) => {
+        this.subCategories = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = 'Error fetching subcategories.';
+        console.error('Error fetching subcategories:', err);
+      }
+    });
+  }
+
+  /** 🔹 When a subcategory is selected */
+  selectSubCategory(sub: any): void {
+    this.selectedSubCategory = sub;
+    this.products = [];
+    this.loading = true;
+    this.errorMessage = '';
+
+    // Small delay for smoother UX (shows loading spinner briefly)
+    setTimeout(() => {
+      this.productSvc.getBySubCategory(sub.id).subscribe({
+        next: (data) => {
+          this.products = data;
+          this.loading = false;
+
+          if (!this.products.length) {
+            this.errorMessage = 'No products available in this subcategory.';
+          }
+        },
+        error: (err) => {
+          this.loading = false;
+          this.errorMessage = 'Error loading products.';
+          console.error('Error loading products:', err);
+        }
+      });
+    }, 400);
   }
 }

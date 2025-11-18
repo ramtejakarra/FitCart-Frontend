@@ -1,25 +1,35 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectCartCount } from '../cart/cart.selectors';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { CartItem } from '../cart/cart.reducer';
 
 @Component({
   selector: 'app-user-layout',
   templateUrl: './user-layout.component.html',
   styleUrls: ['./user-layout.component.scss']
 })
-export class UserLayoutComponent {
-  cartCount$: Observable<number> = this.store.select(selectCartCount);
+export class UserLayoutComponent implements OnInit {
+  cartCount$!: Observable<number>;
 
-  constructor(private router: Router, private auth: AuthService, private store: Store) {}
+  constructor(
+    private store: Store<{ cart: CartItem[] }>,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.cartCount$ = this.store.select('cart').pipe(
+      map(items => items.reduce((sum, item) => sum + item.quantity, 0))
+    );
+  }
 
   navigateToHome(): void {
     this.router.navigate(['/user/home']);
   }
 
   logout(): void {
-    this.auth.logout();
+    localStorage.removeItem('token');
+    this.router.navigate(['/auth/login']);
   }
 }

@@ -3,21 +3,22 @@
 
   <div class="category-grid">
     <div
-      *ngFor="let cat of categories"
       class="category-card"
+      *ngFor="let cat of categories"
       (click)="goToCategory(cat.id)"
     >
       <div class="category-image">
         <img
           [src]="
             cat.imageUrl ||
-            'https://via.placeholder.com/300x200.png?text=' + cat.name
+            'https://via.placeholder.com/400x250.png?text=' + cat.name
           "
           alt="{{ cat.name }}"
         />
-      </div>
-      <div class="overlay">
-        <h3>{{ cat.name }}</h3>
+        <div class="overlay">
+          <h3>{{ cat.name }}</h3>
+          <button mat-raised-button color="primary">Explore</button>
+        </div>
       </div>
     </div>
   </div>

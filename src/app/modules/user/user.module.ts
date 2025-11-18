@@ -2,23 +2,29 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
+// NgRx
+import { StoreModule } from '@ngrx/store';
+import { cartReducer } from './cart/cart.reducer';
+
+// Angular Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { StoreModule } from '@ngrx/store';
-import { cartReducer } from './cart/cart.reducer';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';  // ⭐ ADD THIS
 
-import { SharedModule } from 'src/app/shared/shared.module';
-
-
+// Components
 import { UserRoutingModule } from './user-routing.module';
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { CartComponent } from './cart/cart.component';  // ✅ ADD THIS
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './payment/checkout.component';
 
 @NgModule({
   declarations: [
@@ -27,19 +33,24 @@ import { CartComponent } from './cart/cart.component';  // ✅ ADD THIS
     CategoryComponent,
     ProductListComponent,
     ProductCardComponent,
-    CartComponent  // ✅ ADD HERE
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
-    CommonModule,   
-    StoreModule.forFeature('cart', cartReducer),   
-    RouterModule,
+    CommonModule,
     FormsModule,
-    MatTooltipModule,
+    RouterModule,
+    UserRoutingModule,
+    StoreModule.forFeature('cart', cartReducer),
+
+    // Material Modules
     MatButtonModule,
     MatCardModule,
     MatToolbarModule,
-    UserRoutingModule,
-     SharedModule, 
+    MatTooltipModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule  // ⭐ REQUIRED FOR <mat-spinner>
   ]
 })
 export class UserModule {}

@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './payment/checkout.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,10 @@ const routes: Routes = [
       { path: 'category/:id', component: CategoryComponent }, // 👈 shows subcategories
       { path: 'category/:id/products', component: ProductListComponent }, // 👈 shows products
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'cart', component: CartComponent }
+      { path: 'cart', component: CartComponent },
+{ path: 'checkout', component: CheckoutComponent },
+
+      
 
     ]
   }

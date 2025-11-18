@@ -1,22 +1,28 @@
 <mat-toolbar color="primary" class="navbar">
-  <span class="logo" (click)="navigateToHome()">FitCart 🛍️</span>
+  <span class="logo">FitCart 🏋️‍♂️</span>
 
   <span class="spacer"></span>
 
-  <button mat-button routerLink="/user/home" routerLinkActive="active">Home</button>
+  <nav class="nav-links">
+    <a routerLink="/user/home" routerLinkActive="active">Home</a>
 
-  <button mat-button routerLink="/user/cart" routerLinkActive="active">
-    🛒 Cart
-    <span class="cart-badge" *ngIf="(cartCount$ | async) as count">{{ count }}</span>
+   <a routerLink="/user/cart" routerLinkActive="active" class="cart-link">
+  <mat-icon>shopping_cart</mat-icon>
+  Cart
+  <ng-container *ngIf="(cartCount$ | async) as count">
+    <span class="cart-badge" *ngIf="count > 0">
+      {{ count }}
+    </span>
+  </ng-container>
+</a>
+
+
+    <a routerLink="/user/profile" routerLinkActive="active">Profile</a>
+  </nav>
+
+  <button mat-raised-button color="warn" class="logout-btn" (click)="logout()">
+    Logout
   </button>
-
-  <button mat-button routerLink="/user/profile" routerLinkActive="active">Profile</button>
-
-  <span class="spacer"></span>
-
-  <button mat-stroked-button color="warn" (click)="logout()">Logout</button>
 </mat-toolbar>
 
-<div class="content">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

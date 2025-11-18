@@ -10,6 +10,7 @@ import { CategoryService } from '../../../services/category.service';
 export class CategoryComponent implements OnInit {
   categoryId!: number;
   subcategories: any[] = [];
+  categoryName = '';
   loading = false;
 
   constructor(
@@ -25,10 +26,16 @@ export class CategoryComponent implements OnInit {
 
   loadSubcategories(): void {
     this.loading = true;
+
     this.categorySvc.getSubCategories(this.categoryId).subscribe({
       next: (data) => {
         this.subcategories = data;
         this.loading = false;
+
+        // Extract category name from the first subcategory (if available)
+        if (data.length > 0) {
+          this.categoryName = data[0].categoryName || 'Category';
+        }
       },
       error: (err) => {
         console.error('Failed to load subcategories', err);
