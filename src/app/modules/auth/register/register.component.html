@@ -1,8 +1,11 @@
 <div class="auth-container">
-  <mat-card class="auth-card">
-    <h2 class="title">Create Account</h2>
+  <div class="nike-card">
+
+    <h2 class="title">Create Your Account</h2>
+    <p class="subtitle">Join FitCart — Train. Shop. Perform.</p>
 
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Full Name</mat-label>
         <input matInput formControlName="fullName" placeholder="Your name" />
@@ -18,14 +21,15 @@
         <input matInput formControlName="password" type="password" placeholder="Choose password" />
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
-        Register
+      <button mat-raised-button class="nike-btn" type="submit" [disabled]="registerForm.invalid">
+        Create Account
       </button>
     </form>
 
     <p class="link">
       Already have an account?
-      <a routerLink="/auth/login">Login</a>
+      <a routerLink="/auth/login">Sign In</a>
     </p>
-  </mat-card>
+
+  </div>
 </div>

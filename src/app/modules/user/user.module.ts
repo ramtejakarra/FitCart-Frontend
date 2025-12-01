@@ -25,6 +25,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './payment/checkout.component';
+import { PaymentSuccessComponent } from '../../payment-success/payment-success.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CheckoutComponent } from './payment/checkout.component';
     ProductListComponent,
     ProductCardComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    PaymentSuccessComponent
   ],
   imports: [
     CommonModule,

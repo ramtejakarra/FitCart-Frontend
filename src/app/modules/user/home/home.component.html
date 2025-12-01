@@ -1,5 +1,5 @@
 <div class="home-container">
-  <h2 class="page-title">🛍️ Shop by Category</h2>
+ 
 
   <div class="category-grid">
     <div
@@ -15,9 +15,10 @@
           "
           alt="{{ cat.name }}"
         />
+
         <div class="overlay">
-          <h3>{{ cat.name }}</h3>
-          <button mat-raised-button color="primary">Explore</button>
+          <h3 class="cat-name">{{ cat.name }}</h3>
+          <button mat-raised-button class="explore-btn">Explore</button>
         </div>
       </div>
     </div>

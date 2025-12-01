@@ -1,28 +1,32 @@
 <div class="auth-container">
-  <mat-card class="auth-card">
-    <h2 class="title">FitCart Login</h2>
+  <div class="nike-card">
+
+    <h2 class="title">Welcome Back</h2>
+    <p class="subtitle">Train. Shop. Perform.</p>
 
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" placeholder="Enter your email" />
-        <mat-error *ngIf="loginForm.get('email')?.invalid">Valid email required</mat-error>
+        <input matInput formControlName="email" type="email" />
+        <mat-error *ngIf="loginForm.get('email')?.invalid">Enter a valid email</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" placeholder="Enter password" />
+        <input matInput formControlName="password" type="password" />
         <mat-error *ngIf="loginForm.get('password')?.invalid">Password required</mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-        Login
+      <button mat-raised-button color="primary" class="nike-btn" type="submit" [disabled]="loginForm.invalid">
+        Sign In
       </button>
     </form>
 
     <p class="link">
-      Don't have an account?
-      <a routerLink="/auth/register">Register</a>
+      Don’t have an account?
+      <a routerLink="/auth/register">Join the Movement</a>
     </p>
-  </mat-card>
+
+  </div>
 </div>

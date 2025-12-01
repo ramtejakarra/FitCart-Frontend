@@ -1,28 +1,34 @@
 <mat-toolbar color="primary" class="navbar">
-  <span class="logo">FitCart 🏋️‍♂️</span>
 
-  <span class="spacer"></span>
+  <!-- Brand Section -->
+  <div class="logo-section" routerLink="/user/home">
+    <span class="logo-text">FitCart</span>
+    <span class="logo-icon">🏋️‍♂️</span>
+  </div>
 
+  <!-- Navigation -->
   <nav class="nav-links">
     <a routerLink="/user/home" routerLinkActive="active">Home</a>
 
-   <a routerLink="/user/cart" routerLinkActive="active" class="cart-link">
-  <mat-icon>shopping_cart</mat-icon>
-  Cart
-  <ng-container *ngIf="(cartCount$ | async) as count">
-    <span class="cart-badge" *ngIf="count > 0">
-      {{ count }}
-    </span>
-  </ng-container>
-</a>
+    <a routerLink="/user/cart" routerLinkActive="active" class="cart-link">
+      <mat-icon class="cart-icon">shopping_cart</mat-icon>
+      Cart
 
+      <ng-container *ngIf="(cartCount$ | async) as count">
+        <span class="cart-badge" *ngIf="count > 0">{{ count }}</span>
+      </ng-container>
+    </a>
 
     <a routerLink="/user/profile" routerLinkActive="active">Profile</a>
   </nav>
 
-  <button mat-raised-button color="warn" class="logout-btn" (click)="logout()">
+  <!-- Logout -->
+  <button mat-stroked-button color="accent" (click)="logout()" class="logout-btn">
+    <mat-icon>logout</mat-icon>
     Logout
   </button>
+
 </mat-toolbar>
 
+<!-- Routed Component -->
 <router-outlet></router-outlet>

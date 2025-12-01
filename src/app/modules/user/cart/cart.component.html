@@ -1,70 +1,82 @@
 <div class="cart-wrapper" *ngIf="(cartItems$ | async)?.length; else emptyCart">
-  <h1 class="title">🛍️ Your Shopping Cart</h1>
+  <h1 class="title">🛍️ Your Cart</h1>
 
   <div class="cart-content">
-    <!-- Cart Items Section -->
+
+    <!-- Cart Items -->
     <div class="cart-items">
       <mat-card class="cart-item" *ngFor="let item of cartItems$ | async">
-        <div class="item-details">
+
+        <div class="item-left">
           <img [src]="item.imageUrl" alt="{{ item.name }}" class="item-image" />
 
           <div class="item-info">
             <h3 class="item-name">{{ item.name }}</h3>
-            <p class="item-price">₹{{ item.price | number }}</p>
+            <p class="item-price">₹{{ item.price }}</p>
 
             <div class="quantity-controls">
-              <button mat-mini-fab color="primary" (click)="decrease(item.id)">−</button>
+              <button mat-icon-button color="primary" (click)="decrease(item.id)">
+                <mat-icon>remove</mat-icon>
+              </button>
+
               <span class="quantity">{{ item.quantity }}</span>
-              <button mat-mini-fab color="primary" (click)="increase(item.id)">+</button>
+
+              <button mat-icon-button color="primary" (click)="increase(item.id)">
+                <mat-icon>add</mat-icon>
+              </button>
             </div>
           </div>
         </div>
 
-        <button mat-icon-button color="warn" (click)="remove(item.id)" class="remove-btn">
-          <mat-icon>delete_outline</mat-icon>
+        <button mat-icon-button color="warn" (click)="remove(item.id)" class="delete-btn">
+          <mat-icon>delete</mat-icon>
         </button>
+
       </mat-card>
     </div>
 
-    <!-- Summary Section -->
+    <!-- Summary -->
     <div class="cart-summary">
-      <h2>Order Summary 🧾</h2>
+      <h2 class="summary-title">Order Summary</h2>
 
       <div class="summary-item">
         <span>Subtotal</span>
-        <span>₹{{ total$ | async | number }}</span>
+        <span>₹{{ total$ | async }}</span>
       </div>
 
       <div class="summary-item">
         <span>Shipping</span>
-        <span>FREE 🚚</span>
+        <span class="free-tag">FREE</span>
       </div>
 
       <div class="summary-total">
         <span>Total</span>
-        <span>₹{{ total$ | async | number }}</span>
+        <span>₹{{ total$ | async }}</span>
       </div>
 
-      <div class="summary-buttons">
-        <button mat-stroked-button color="warn" (click)="clearCart()">Clear Cart</button>
-        <button mat-raised-button color="primary" class="checkout-btn">
-          Proceed to Checkout
-        </button><button mat-raised-button color="primary" class="checkout-btn"
-        (click)="goToCheckout()">
-  Proceed to Checkout
-</button>
+      <div class="summary-actions">
+        <button mat-stroked-button color="warn" (click)="clearCart()">
+          Clear Cart
+        </button>
 
+        <button mat-raised-button color="primary" class="checkout-btn"
+                (click)="goToCheckout()">
+          Proceed to Checkout
+        </button>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- Empty Cart Template -->
+<!-- Empty Cart -->
 <ng-template #emptyCart>
   <div class="empty-state">
     <mat-icon>remove_shopping_cart</mat-icon>
     <h2>Your cart is empty 😔</h2>
-    <p>Add items you love and come back!</p>
-    <button mat-raised-button color="primary" routerLink="/user/home">Start Shopping</button>
+    <p>Looks like you haven’t added anything yet.</p>
+    <button mat-raised-button color="primary" routerLink="/user/home">
+      Start Shopping
+    </button>
   </div>
 </ng-template>

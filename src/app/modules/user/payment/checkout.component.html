@@ -1,30 +1,61 @@
 <div class="checkout-page">
-  <h2>Checkout</h2>
+
+  <h2 class="checkout-title">Checkout</h2>
 
   <ng-container *ngIf="(cartItems$ | async)?.length; else emptyTpl">
 
-    <div class="items">
-      <div class="item" *ngFor="let it of cartItems$ | async">
-        <img [src]="it.imageUrl" />
-        <div class="meta">
-          <h4>{{ it.name }}</h4>
-          <p>₹{{ it.price }} × {{ it.quantity }}</p>
+    <div class="checkout-content">
+
+      <!-- LEFT: Order Items -->
+      <div class="order-items">
+        <h3>Order Items</h3>
+
+        <div class="item" *ngFor="let it of cartItems$ | async">
+          <img [src]="it.imageUrl" />
+
+          <div class="meta">
+            <h4>{{ it.name }}</h4>
+            <p class="price-line">₹{{ it.price }} × {{ it.quantity }}</p>
+          </div>
+
         </div>
       </div>
-    </div>
 
-    <div class="total">
-      <h3>Total: ₹{{ total$ | async }}</h3>
+      <!-- RIGHT: Payment Section -->
+      <div class="payment-box">
+        <h3>Order Summary</h3>
 
-      <button mat-raised-button color="primary"
-              (click)="placeOrderAndPay()">
-        Pay Now
-      </button>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>₹{{ total$ | async }}</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span class="free">FREE</span>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <span>₹{{ total$ | async }}</span>
+        </div>
+
+        <button mat-raised-button color="primary" class="pay-btn"
+                (click)="placeOrderAndPay()">
+          Pay Now
+        </button>
+      </div>
+
     </div>
 
   </ng-container>
 
   <ng-template #emptyTpl>
-    <p>Your cart is empty 😔</p>
+    <div class="empty-box">
+      <h3>Your cart is empty 😔</h3>
+      <button mat-raised-button color="primary" routerLink="/user/home">
+        Start Shopping
+      </button>
+    </div>
   </ng-template>
 </div>

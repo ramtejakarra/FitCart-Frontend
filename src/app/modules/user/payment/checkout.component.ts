@@ -22,7 +22,7 @@ export class CheckoutComponent implements OnInit {
   total$!: Observable<number>;
 
   currentUser = {
-    id: 1,
+    id: 4,  // you can replace with actual user from auth service
     name: "Guest User",
     email: "guest@example.com",
     contact: ""
@@ -55,10 +55,24 @@ export class CheckoutComponent implements OnInit {
     const productIds = items.map(x => x.id);
 
     try {
-      const order = await firstValueFrom(
-        this.paymentSvc.createOrderForCart({ productIds, amount })
+      const orderResponse = await firstValueFrom(
+        this.paymentSvc.createOrderForCart({
+          productIds,
+          amount,
+          userId: this.currentUser.id
+        })
       );
 
+      console.log("ORDER RESPONSE:", orderResponse);
+
+      // ✔ Backend returns FLAT OBJECT (not ResponseModel)
+      if (!orderResponse || !orderResponse.orderId) {
+        throw new Error("Order creation failed");
+      }
+
+      const order = orderResponse;
+
+      // Razorpay options
       const options = {
         key: order.razorpayKey,
         amount: order.grandTotal,
@@ -85,8 +99,10 @@ export class CheckoutComponent implements OnInit {
             await firstValueFrom(this.paymentSvc.verifyPayment(orderModel));
 
             this.snack.open("Payment successful!", "OK", { duration: 2500 });
-            this.store.dispatch(clearCart());
-            this.router.navigate(['/user/orders']);
+this.store.dispatch(clearCart());
+this.router.navigate(['/payment-success']);
+
+           
           } catch (err) {
             this.snack.open("Payment verification failed!", "OK", { duration: 3000 });
           }
@@ -101,9 +117,11 @@ export class CheckoutComponent implements OnInit {
         theme: { color: "#3f51b5" }
       };
 
+      // Open Razorpay checkout
       new Razorpay(options).open();
 
     } catch (err) {
+      console.error(err);
       this.snack.open("Unable to create order.", "Retry", { duration: 3000 });
     }
   }

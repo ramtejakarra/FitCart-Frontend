@@ -1,31 +1,114 @@
 .auth-container {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #1976d2, #2196f3);
+
+  /* Same Nike hero dark background */
+  background: radial-gradient(circle at 20% 20%, #1b1b1b, #0a0a0a 70%);
+  padding: 1.5rem;
 }
 
-.auth-card {
-  width: 400px;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
+.nike-card {
+  width: 420px;
+  padding: 2.6rem;
+  border-radius: 14px;
 
-.title {
+  background: rgba(15, 15, 15, 0.85); /* Matte black glass */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+
+  color: #fff;
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #1976d2;
-  font-weight: 600;
+
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+
+  animation: fadeUp 0.7s ease-out;
 }
 
+/* Title and subtitle */
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  opacity: 0.75;
+  margin-bottom: 2rem;
+}
+
+/* Input fields */
 .full-width {
   width: 100%;
+  margin-bottom: 1.3rem;
+
+  input {
+    color: #fff !important;
+  }
+
+  mat-label {
+    color: #ccc !important;
+  }
+
+  mat-error {
+    color: #ff5252 !important;
+    font-weight: 600;
+  }
 }
 
+/* Nike “Volt” Sign-Up Button */
+.nike-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  background: linear-gradient(135deg, #00ff6a, #4aff9c) !important;
+  color: black !important;
+
+  box-shadow: 0 6px 16px rgba(0, 255, 120, 0.45);
+  transition: 0.3s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 26px rgba(0, 255, 120, 0.65);
+  }
+
+  &:disabled {
+    background: #333 !important;
+    color: #777 !important;
+    box-shadow: none;
+  }
+}
+
+/* Bottom link */
 .link {
-  margin-top: 1rem;
-  text-align: center;
+  margin-top: 1.4rem;
+  font-size: 0.95rem;
+
+  a {
+    color: #4aff9c;
+    font-weight: 700;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+/* Fade animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

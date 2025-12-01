@@ -1,38 +1,38 @@
 <div class="category-page" *ngIf="!loading; else loadingTpl">
+
   <!-- Header Section -->
   <div class="header">
     <h2 class="title">🛍️ Explore {{ categoryName || 'Subcategories' }}</h2>
     <p class="subtitle">Select a subcategory to view all available products</p>
   </div>
 
-  <!-- Subcategory Cards -->
+  <!-- Subcategory Grid -->
   <div class="subcategory-grid">
     <div
-      *ngFor="let sub of subcategories"
       class="subcategory-card"
+      *ngFor="let sub of subcategories"
       (click)="goToProducts(sub.id)"
     >
-      <div class="image-wrapper">
-        <img
-          [src]="sub.imageUrl || 'https://via.placeholder.com/300x200?text=' + sub.name"
-          alt="{{ sub.name }}"
-        />
-      </div>
+      <!-- Content (Image removed) -->
       <div class="card-body">
+
         <h3 class="subcategory-name">{{ sub.name }}</h3>
+
         <p class="subcategory-desc">
           Discover the best {{ sub.name }} items tailored for your fitness goals.
         </p>
-        <button mat-raised-button color="primary" class="view-btn">
+
+        <button mat-raised-button class="view-btn">
           View Products
           <mat-icon>arrow_forward</mat-icon>
         </button>
+
       </div>
     </div>
   </div>
 </div>
 
-<!-- Loading Template -->
+<!-- Loading -->
 <ng-template #loadingTpl>
   <div class="loading-section">
     <mat-spinner diameter="50"></mat-spinner>
